@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-core.min.js"></script>
+    <script src="https:/cdn.anychart.com/releases/v8/js/anychart-treemap.min.js"></script>
+    <title>My First JavaScript Treemap Chart</title>
+    <style>
+        html,
+        body,
+        #container {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container"></div>
+    <style>
+        span {
+            color: #fff;
+            font-size: 14px;
+        }
+    </style>
+    <script>
+        anychart.onDocumentReady(function () {
+            var chart = anychart.treeMap(getData(), "as-tree");
+
+            chart.maxDepth(2);
+
+            chart.hintDepth(1);
+
+            chart.hintOpacity(0.7);
+
+            chart.labels().useHtml(true);
+            chart.labels().format(
+                "<span style='font-weight:bold; color: #fff;'>{%name}</span><br>{%points}"
+            );
+
+            chart.tooltip().useHtml(true);
+            chart.tooltip().format(
+                "COMPANY : {%name}%<br>PERCENTAGE CHANGE: {%points}%<br>MARKET CAP: {%points}<br>VOLUME: {%points}<br>"
+            );
+
+            chart.container("container");
+
+            chart.draw();
+
+            var customColorScale = anychart.scales.linearColor();
+            customColorScale.colors(["green", "red",]);
+            console.log(chart)
+
+            chart.colorScale(customColorScale);
+
+            // chart.colorRange().enabled(true);
+            chart.colorRange().length("100%");
+            chart.fontColor = 'white'
+
+            chart.fill(coloringFunction);
+
+
+
+            function coloringFunction(value, points, name) {
+
+                console.log(value)
+                if (this.value < 0) {
+                    return 'red'
+
+                }
+                else if (this.value > 0) {
+                    return 'red'
+                }
+
+            }
+
+            /*chart.title().useHtml(true);
+            chart.title(
+                "<span style='font-size:18; font-style:bold'>PSX TREE MAP </span><br><i><span style='font-size:14; font-style:italic'>UPDATED(7:11 PM)</i>"
+            );*/
+
+        });
+
+        // get data
+        function getData() {
+            // create data
+            var data = [
+                {
+                    name: "PAKISTAN STOCK EXCHANGE",
+                    children: [
+                        {
+                            name: "TECH ",
+                            children: [
+                                {
+                                    name: "HUMNL",
+                                    value: 24,
+                                    points: 0.26
+
+                                },
+                                {
+                                    name: "TRG",
+                                    value: 6,
+                                    points: 2.3
+                                    ,
+                                    points: 0.26
+
+                                },
+                                {
+                                    name: "SYS",
+                                    value: 55,
+                                    points: 4.26
+
+
+                                }
+                            ]
+                        },
+                        {
+                            name: "SUGAR & ALLIED INDUSTRIES ",
+                            children: [
+                                {
+                                    name: "AGSML",
+                                    value: 12,
+                                    points: 2.26
+
+
+
+                                },
+                                {
+                                    name: "MIRKS",
+                                    value: 14,
+                                    points: 3.26
+                                    ,
+
+                                },
+                                {
+                                    name: "ALNRS",
+                                    value: 15,
+                                    points: 0.26
+
+                                }
+                            ]
+                        },
+                        {
+                            name: "CHEMICAL ",
+                            children: [
+                                {
+                                    name: "GGL",
+                                    value: 16,
+                                    points: 4.26
+
+
+                                },
+                                {
+                                    name: "LOTCHEM	",
+                                    value: 37,
+                                    points: 6.26
+
+                                },
+                                {
+                                    name: "EPCL",
+                                    value: 18,
+                                    points: 0.26
+
+                                }
+                            ]
+                        },
+                        {
+                            name: "GLASS AND CERAMICS ",
+                            children: [
+                                {
+                                    name: "TGL",
+                                    value: 3,
+                                    points: 0.26
+
+
+                                },
+                                {
+                                    name: "BGL",
+                                    value: 7,
+                                    points: 9.26
+
+                                },
+                                {
+                                    name: "STCL",
+                                    value: 11,
+                                    points: 10.26
+
+                                }
+                            ]
+                        },
+                        {
+                            name: "ENGINEERING ",
+                            children: [
+                                {
+                                    name: "ASL",
+                                    value: 12,
+                                    points: 4.26
+
+
+                                },
+                                {
+                                    name: "MUGHAL",
+                                    value: 44,
+                                    points: 0.26
+
+                                },
+                                {
+                                    name: "DSL",
+                                    value: 8,
+                                    points: 5.26
+
+                                }
+                            ]
+                        },
+                        {
+                            name: "INSURANCE ",
+                            children: [
+                                {
+                                    name: "AICL",
+                                    value: 13,
+                                    points: 6.26
+
+
+                                },
+                                {
+                                    name: "FFL",
+                                    value: 19,
+                                    points: 6.26
+
+                                },
+                                {
+                                    name: "MMMM",
+                                    value: 12,
+                                    points: 0.26
+
+                                }
+                            ]
+                        },
+                        {
+                            name: "MODARBAS ",
+                            children: [
+                                {
+                                    name: "FNBM",
+                                    value: 3,
+                                    points: 10.26
+
+
+                                },
+                                {
+                                    name: "MODAM	",
+                                    value: 5,
+                                    points: 0.26
+
+                                },
+                                {
+                                    name: "ARM",
+                                    value: 9,
+                                    points: 50.26
+
+                                }
+                            ]
+                        },
+                        {
+                            name: "CEMENT ",
+                            children: [
+                                {
+                                    name: "MLCF",
+                                    value: 112,
+                                    points: -8.26
+
+
+                                },
+                                {
+                                    name: "FCCL	",
+                                    value: 35,
+                                    points: 0.26
+
+                                },
+                                {
+                                    name: "DGKC",
+                                    value: 4,
+                                    points: 10.26
+
+                                }
+                            ]
+                        },
+
+
+
+                    ]
+                }
+            ];
+
+            return data;
+        }
+
+
+    </script>
+</body>
+
+</html>
